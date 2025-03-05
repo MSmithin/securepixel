@@ -15,44 +15,64 @@ body {
 
 .expanding-box {
     width: 90vw;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 40px);
     max-height: 90vh;
     background: linear-gradient(45deg, #6a3093, #2c003e);
     border-radius: 50% 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: expand 10s infinite alternate;
     position: relative;
     box-shadow: 0 0 60px rgba(106,48,147,0.8);
     overflow-y: auto;
+    animation: expand 2s ease-out forwards; /* Animation on load */
 }
 
 @keyframes expand {
-    0% { transform: scale(0.9); }
-    100% { transform: scale(1.1); }
+    0% { transform: scale(0.5); opacity: 0; border-radius: 50%; }
+    100% { transform: scale(1); opacity: 1; border-radius: 0; background: #2c003e; } /* Solid background */
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: clamp(1.5em, 4vw, 2.5em);
+    text-shadow: 0 0 10px #6a3093;
+}
+
+.nav-buttons {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.nav-button {
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #b388ff;
+    color: #b388ff;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: button-glow 1.5s infinite alternate;
+}
+
+.nav-button:hover {
+    background: #b388ff;
+    color: #000;
 }
 
 .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
+    padding: 100px 20px 20px;
     opacity: 0;
-    animation: fade-in 2s forwards 1s;
-    max-width: 90%;
-    padding-bottom: 30px;
+    animation: fade-in 1s forwards 2s; /* Fade in after expand */
 }
 
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-.logo {
-    font-size: clamp(2em, 5vw, 3em);
-    text-shadow: 0 0 10px #6a3093;
 }
 
 h2 {
@@ -140,76 +160,7 @@ p {
     margin: 0;
 }
 
-.cms-button, .contact-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid #b388ff;
-    color: #b388ff;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    animation: button-glow 1.5s infinite alternate;
-}
-
-.cms-button:hover, .contact-button:hover {
-    background: #b388ff;
-    color: #000;
-}
-
-.arrow-down {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #b388ff;
-    cursor: pointer;
-    animation: bounce 1s infinite;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 1;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-    40% { transform: translateY(-10px) translateX(-50%); }
-    60% { transform: translateY(-5px) translateX(-50%); }
-}
-
-.arrow-down.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.contact-section {
-    position: absolute;
-    bottom: -100px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    padding: 20px 0;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.contact-section.visible {
-    bottom: 0;
-    opacity: 1;
-}
-
 @keyframes button-glow {
     0% { box-shadow: 0 0 10px #b388ff; }
-    100% { box-shadow: 0 0 30px #b388ff, 0 0 20px #6a3093; }
-}
-
-@supports not (backdrop-filter: blur(10px)) {
-    .contact-section {
-        background: rgba(106,48,147,0.8);
-    }
+    100% { box-shadow: 0 0 20px #b388ff, 0 0 10px #6a3093; }
 }
