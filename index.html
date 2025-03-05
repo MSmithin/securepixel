@@ -3,216 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecurePixel - Expanding Horizons</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            overflow: hidden;
-        }
-        .expanding-box {
-            width: 90vw;
-            height: calc(100vh - 120px); /* Adjust height to leave space for arrow and contact section */
-            max-height: 90vh;
-            background: linear-gradient(45deg, #6a3093, #2c003e);
-            border-radius: 50% 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: expand 10s infinite alternate;
-            position: relative;
-            box-shadow: 0 0 60px rgba(106,48,147,0.8);
-        }
-        @keyframes expand {
-            0% { transform: scale(0.9); }
-            100% { transform: scale(1.1); }
-        }
-        .logo {
-            font-size: clamp(2em, 5vw, 3em); /* Responsive font size */
-            text-shadow: 0 0 10px #6a3093;
-        }
-        .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            opacity: 0;
-            animation: fade-in 2s forwards 1s;
-            max-width: 90%;
-            padding-bottom: 30px; /* Space for arrow */
-        }
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        h2 {
-            font-size: clamp(1.2em, 3vw, 1.5em); /* Responsive font size */
-            margin: 0;
-            color: #b388ff;
-        }
-        p {
-            font-size: clamp(0.8em, 2vw, 1em); /* Responsive font size */
-            line-height: 1.5;
-            max-width: 600px;
-            margin: 10px auto 0;
-        }
-        .glitch {
-            position: relative;
-            display: inline-block;
-        }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            color: #fff;
-            overflow: hidden;
-            opacity: 0.7;
-        }
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00c1;
-            animation: glitch-anim 2s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00c1ff;
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% { clip: rect(44px, 999px, 44px, 0); }
-            5% { clip: rect(12px, 999px, 44px, 0); }
-            10% { clip: rect(26px, 999px, 70px, 0); }
-            15% { clip: rect(44px, 999px, 64px, 0); }
-            20% { clip: rect(14px, 999px, 51px, 0); }
-            25% { clip: rect(36px, 999px, 53px, 0); }
-            30% { clip: rect(11px, 999px, 43px, 0); }
-            35% { clip: rect(43px, 999px, 69px, 0); }
-            40% { clip: rect(13px, 999px, 65px, 0); }
-            45% { clip: rect(35px, 999px, 40px, 0); }
-            50% { clip: rect(44px, 999px, 44px, 0); }
-        }
-
-        /* Arrow down animation */
-        .arrow-down {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 20px solid #b388ff;
-            cursor: pointer;
-            animation: bounce 1s infinite;
-            transition: opacity 0.3s ease-in-out;
-            z-index: 1; /* Ensure it's above other content */
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 
-            40% { transform: translateY(-10px) translateX(-50%); }
-            60% { transform: translateY(-5px) translateX(-50%); }
-        }
-        .arrow-down.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Contact section */
-        .contact-section {
-            position: absolute;
-            bottom: -100px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            opacity: 0;
-            transition: all 0.5s ease-in-out;
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        .contact-section.visible {
-            bottom: 0;
-            opacity: 1;
-        }
-        .contact-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: transparent;
-            border: 2px solid #b388ff;
-            color: #b388ff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(0.8em, 2.5vw, 1em); /* Responsive font size */
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            animation: button-glow 1.5s infinite alternate;
-        }
-        @keyframes button-glow {
-            0% { box-shadow: 0 0 10px #b388ff; }
-            100% { box-shadow: 0 0 30px #b388ff, 0 0 20px #6a3093; }
-        }
-        .contact-button:hover {
-            background: #b388ff;
-            color: #000;
-        }
-
-        /* For older browsers */
-        @supports not (backdrop-filter: blur(10px)) {
-            .contact-section {
-                background: rgba(106,48,147,0.8); /* Fallback color */
-            }
-        }
-    </style>
+    <title>SecurePixel - Web Design & Custom CMS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="expanding-box">
         <div class="content">
             <h1 class="logo glitch" data-text="SecurePixel">SecurePixel</h1>
-            <h2>Expanding Horizons</h2>
-            <p>We're not just upgrading; we're expanding into new realms of digital excellence.</p>
-            <p>SecurePixel is evolving, enhancing our capabilities to offer unparalleled:</p>
-            <p>
-                - <strong>Dynamic Security Solutions</strong><br>
-                - <strong>Next-Level User Experience</strong><br>
-                - <strong>AI-Driven Performance Optimization</strong><br>
-                - <strong>Global Scalability</strong>
-            </p>
-            <p>Stay connected as we push the boundaries of what's possible.</p>
+            <p id="intro-text">Showcasing our finest web designs and custom CMS solutions.</p>
+            <h2>Our Work</h2>
+            <div class="gallery" id="gallery"></div>
+            <h2>Custom CMS</h2>
+            <p>Edit your website effortlessly with our tailored content management system.</p>
+            <a href="https://your-firebase-hosted-admin.web.app" class="cms-button">Try the CMS</a>
         </div>
         <div class="arrow-down" onclick="toggleContact()"></div>
         <div class="contact-section" id="contact-section">
             <a href="mailto:securepixeled@gmail.com" class="contact-button">Contact Us</a>
         </div>
     </div>
-
-    <script>
-        function toggleContact() {
-            const contactSection = document.getElementById('contact-section');
-            const arrow = document.querySelector('.arrow-down');
-            
-            if(contactSection.classList.contains('visible')) {
-                contactSection.classList.remove('visible');
-                arrow.classList.remove('hidden');
-            } else {
-                contactSection.classList.add('visible');
-                arrow.classList.add('hidden');
-            }
-        }
-    </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
