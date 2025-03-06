@@ -1,7 +1,8 @@
 @font-face {
     font-family: 'Neuropol';
-    src: url('assets/fonts/neuropol.ttf') format('truetype');
+    src: url('../fonts/neuropol.ttf') format('truetype');
 }
+
 
 * {
     margin: 0;
