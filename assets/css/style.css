@@ -3,7 +3,6 @@
     src: url('../fonts/neuropol.ttf') format('truetype');
 }
 
-/* From your earlier version */
 .expanding-box {
     width: 100vw;
     min-height: 100vh;
@@ -99,25 +98,119 @@ p {
     text-align: center;
 }
 
-form {
+/* Prettier Login Styles */
+.login-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    max-width: 300px;
+    gap: 1.5rem;
+    max-width: 350px;
     margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(106, 48, 147, 0.5);
+    animation: fade-in 1s ease-in;
 }
 
-input, button {
-    padding: 0.5rem;
+.input-group {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
     font-family: 'Neuropol', sans-serif;
+    font-size: 1rem;
+    background: #1a0029;
     border: 1px solid #b388ff;
     border-radius: 5px;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-button {
+input:focus {
+    border-color: #ff00c1;
+    box-shadow: 0 0 15px rgba(255, 0, 193, 0.5);
+}
+
+.input-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 110%;
+    background: radial-gradient(circle, rgba(106, 48, 147, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
+.login-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid #b388ff;
+    border-radius: 5px;
+    color: #b388ff;
+    font-family: 'Neuropol', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: button-glow 1.5s infinite alternate;
+}
+
+.login-btn:hover {
     background: #b388ff;
     color: #000;
-    cursor: pointer;
+    box-shadow: 0 0 20px #b388ff;
+}
+
+.error-message {
+    color: #ff00c1;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    opacity: 0.6;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: 2px 0 #00c1ff;
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(40% 0 60% 0); }
+    20% { clip-path: inset(20% 0 80% 0); }
+    40% { clip-path: inset(60% 0 40% 0); }
+    60% { clip-path: inset(80% 0 20% 0); }
+    100% { clip-path: inset(40% 0 60% 0); }
 }
 
 @keyframes button-glow {
@@ -126,21 +219,60 @@ button {
 }
 
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 1rem;
+    .login-container {
+        max-width: 90%;
+        padding: 1.5rem;
     }
+}
 
-    .nav-buttons {
-        position: static;
-        transform: none;
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+/* For the cms.html page */
+.sales-pitch {
+    padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-    .login-button {
-        position: static;
-        margin-top: 1rem;
+.tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: #b388ff;
+    margin-bottom: 2rem;
+}
+
+.pitch-section {
+    margin-bottom: 2.5rem;
+}
+
+.pitch-section h3 {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #ff00c1;
+    margin-bottom: 1rem;
+}
+
+.pitch-section p {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #b388ff;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-family: 'Neuropol', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #ff00c1;
+    box-shadow: 0 0 20px #ff00c1;
+}
+
+@media (max-width: 768px) {
+    .sales-pitch {
+        padding: 2rem;
     }
 }
