@@ -18,13 +18,19 @@
             </nav>
         </header>
         <main class="content">
-            <h2>Login to Manage Your Site</h2>
-            <form id="login-form">
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+            <h2 class="glitch" data-text="Secure Login">Secure Login</h2>
+            <form id="login-form" class="login-container">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <span class="input-glow"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="input-glow"></span>
+                </div>
+                <button type="submit" class="login-btn">Enter the Pixelverse</button>
             </form>
-            <p id="login-message" style="display: none;"></p>
+            <p id="login-message" class="error-message" style="display: none;"></p>
         </main>
     </div>
     <script src="assets/js/script.js"></script>
