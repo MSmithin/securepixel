@@ -6,7 +6,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #000;
+    background: #2c003e; /* Solid purple background */
     color: #fff;
     font-family: 'Neuropol', sans-serif;
     overflow-x: hidden;
@@ -14,7 +14,8 @@ body {
 
 .expanding-box {
     width: 100vw;
-    background: linear-gradient(135deg, #2c003e, #6a3093);
+    min-height: 100vh;
+    background: #2c003e; /* Match body background */
     animation: expand 1.5s ease-out forwards;
     display: flex;
     flex-direction: column;
@@ -30,7 +31,7 @@ body {
 
 @keyframes expand {
     0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; background: #2c003e; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes glow {
@@ -53,8 +54,8 @@ header {
 .nav-container {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin: 0 auto; /* Center horizontally */
+    flex-grow: 1;
+    justify-content: center; /* Center nav buttons */
 }
 
 .nav-buttons {
@@ -81,6 +82,10 @@ header {
     background: #b388ff;
     color: #000;
     box-shadow: 0 0 15px #b388ff;
+}
+
+.login-button {
+    margin-left: auto; /* Push to far right */
 }
 
 .content {
@@ -117,7 +122,7 @@ p {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 350px; /* Fixed width for symmetry */
+    width: 350px;
     max-width: 90%;
     margin: 2rem auto;
     padding: 2rem;
@@ -220,7 +225,7 @@ input:focus {
 
 .tagline {
     font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    color: #00c1ff; /* Changed to cyan (analogous to #2c003e purple) */
+    color: #00c1ff;
     margin-bottom: 2rem;
 }
 
@@ -252,7 +257,7 @@ input:focus {
     text-transform: uppercase;
     text-decoration: none;
     transition: all 0.3s ease;
-    margin: 1.5rem auto 0; /* Moved below text */
+    margin: 1.5rem auto 0;
 }
 
 .cta-button:hover {
@@ -306,14 +311,17 @@ input:focus {
         padding: 1rem;
     }
     .nav-container {
-        flex-direction: column;
+        flex-direction: row;
         margin: 1rem 0;
+        width: 100%;
+        justify-content: center;
     }
     .nav-buttons {
         flex-wrap: wrap;
         justify-content: center;
     }
     .login-button {
+        margin-left: 0;
         margin-top: 1rem;
     }
     .login-container {
