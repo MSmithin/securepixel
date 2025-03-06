@@ -10,15 +10,16 @@ body {
     color: #fff;
     font-family: 'Neuropol', sans-serif;
     overflow-x: hidden;
+    min-height: 100vh; /* Ensure body covers full viewport height */
 }
 
 .expanding-box {
     width: 100vw;
-    min-height: 100vh;
     background: #2c003e; /* Match body background */
     animation: expand 1.5s ease-out forwards;
     display: flex;
     flex-direction: column;
+    min-height: 100%; /* Stretch to fit content */
 }
 
 .logo {
@@ -92,6 +93,7 @@ header {
     padding: 2rem;
     opacity: 0;
     animation: fade-in 1s forwards 1.5s;
+    flex-grow: 1; /* Ensure content fills available space */
 }
 
 @keyframes fade-in {
@@ -219,8 +221,7 @@ input:focus {
     padding: 3rem;
     max-width: 1000px;
     margin: 0 auto;
-    overflow-y: auto;
-    min-height: 0;
+    flex-grow: 1; /* Ensure pitch fills space */
 }
 
 .tagline {
