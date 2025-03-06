@@ -3,13 +3,19 @@
     src: url('../fonts/neuropol.ttf') format('truetype');
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: 'Neuropol', sans-serif;
+    overflow-x: hidden;
+}
+
 .expanding-box {
     width: 100vw;
     min-height: 100vh;
     background: linear-gradient(135deg, #2c003e, #6a3093);
-    position: fixed;
-    top: 0;
-    left: 0;
     animation: expand 1.5s ease-out forwards;
     display: flex;
     flex-direction: column;
@@ -19,7 +25,8 @@
     font-family: 'Neuropol', sans-serif;
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     text-shadow: 0 0 60px rgba(106, 48, 147, 0.8);
-    animation: glow 10s infinite alternate;
+    animation: glow 3s infinite alternate; /* Adjusted duration */
+    position: relative; /* Keep it in place */
 }
 
 @keyframes expand {
@@ -28,17 +35,25 @@
 }
 
 @keyframes glow {
-    0% { transform: scale(0.9); text-shadow: 0 0 10px #6a3093; }
-    100% { transform: scale(1.1); text-shadow: 0 0 60px #b388ff; }
+    0% { transform: scale(0.95); text-shadow: 0 0 10px #6a3093; }
+    100% { transform: scale(1); text-shadow: 0 0 30px #b388ff; } /* Reduced scale to stay in view */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .nav-buttons {
     display: flex;
     gap: 1rem;
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0 auto; /* Center at top */
 }
 
 .nav-button, .login-button {
@@ -53,6 +68,7 @@
     text-decoration: none;
     transition: all 0.3s ease;
     animation: button-glow 1.5s infinite alternate;
+    cursor: pointer; /* Ensure clickable */
 }
 
 .nav-button:hover, .login-button:hover {
@@ -72,7 +88,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 2rem;
     opacity: 0;
     animation: fade-in 1s forwards 1.5s;
@@ -98,7 +113,7 @@ p {
     text-align: center;
 }
 
-/* Prettier Login Styles */
+/* Login Styles */
 .login-container {
     display: flex;
     flex-direction: column;
@@ -154,28 +169,91 @@ input:focus {
 
 .login-btn {
     padding: 0.75rem 1.5rem;
-    background: transparent;
-    border: 2px solid #b388ff;
+    background: linear-gradient(45deg, #b388ff, #ff00c1);
+    border: none;
     border-radius: 5px;
-    color: #b388ff;
+    color: #fff;
     font-family: 'Neuropol', sans-serif;
     font-size: 1rem;
     text-transform: uppercase;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
     transition: all 0.3s ease;
-    animation: button-glow 1.5s infinite alternate;
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+}
+
+.login-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .login-btn:hover {
-    background: #b388ff;
-    color: #000;
-    box-shadow: 0 0 20px #b388ff;
+    box-shadow: 0 0 25px #ff00c1, 0 0 15px #b388ff;
 }
 
 .error-message {
     color: #ff00c1;
     font-size: 0.9rem;
     margin-top: 1rem;
+}
+
+/* CMS Pitch Styles */
+.sales-pitch {
+    padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-y: auto; /* Enable scrolling */
+    min-height: 0; /* Allow content to expand */
+}
+
+.tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: #b388ff;
+    margin-bottom: 2rem;
+}
+
+.pitch-section {
+    margin-bottom: 2.5rem;
+}
+
+.pitch-section h3 {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #ff00c1;
+    margin-bottom: 1rem;
+}
+
+.pitch-section p {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #b388ff;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-family: 'Neuropol', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #ff00c1;
+    box-shadow: 0 0 20px #ff00c1;
 }
 
 .glitch {
@@ -219,59 +297,21 @@ input:focus {
 }
 
 @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .nav-buttons {
+        margin: 1rem 0;
+    }
+    .login-button {
+        position: static;
+        margin-top: 1rem;
+    }
     .login-container {
         max-width: 90%;
         padding: 1.5rem;
     }
-}
-
-/* For the cms.html page */
-.sales-pitch {
-    padding: 3rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.tagline {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    color: #b388ff;
-    margin-bottom: 2rem;
-}
-
-.pitch-section {
-    margin-bottom: 2.5rem;
-}
-
-.pitch-section h3 {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    color: #ff00c1;
-    margin-bottom: 1rem;
-}
-
-.pitch-section p {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background: #b388ff;
-    border: none;
-    border-radius: 5px;
-    color: #000;
-    font-family: 'Neuropol', sans-serif;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    background: #ff00c1;
-    box-shadow: 0 0 20px #ff00c1;
-}
-
-@media (max-width: 768px) {
     .sales-pitch {
         padding: 2rem;
     }
